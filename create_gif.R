@@ -1,6 +1,7 @@
 library(tidyverse)
 library(gganimate)
 library(cowplot)
+library(scales)
 
 # defaulting to deck_size = 40 since it's for Limited
 create_hits_distibution <- function(snow_card_count, deck_size = 31){
@@ -22,6 +23,9 @@ play_gif <- ggplot(hits_distibutions_play, aes(hits, prob)) +
   geom_col(color = "black") +
   transition_states(possible_hits, transition_length = 1, state_length = 2) +
   theme_cowplot() +
+  scale_x_continuous(breaks = pretty_breaks(n = 7)) +
+  ylim(0, 0.5) +
+  scale_y_continuous(breaks = seq(0.1, 0.5, by = 0.1)) + 
   labs(x = "Number of snow cards", 
        y = "Probability",
        title = "How many hits can you expect from Glacial Revelation?",
@@ -32,6 +36,9 @@ draw_gif <- ggplot(hits_distibutions_draw, aes(hits, prob)) +
   geom_col(color = "black") +
   transition_states(possible_hits, transition_length = 1, state_length = 2) +
   theme_cowplot() +
+  scale_x_continuous(breaks = pretty_breaks(n = 7)) +
+  ylim(0, 0.5) +
+  scale_y_continuous(breaks = seq(0.1, 0.5, by = 0.1)) + 
   labs(x = "Number of snow cards", 
        y = "Probability",
        title = "How many hits can you expect from Glacial Revelation?",
