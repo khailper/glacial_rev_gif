@@ -26,4 +26,17 @@ play_gif <- ggplot(hits_distibutions_play, aes(hits, prob)) +
        y = "Probability",
        title = "How many hits can you expect from Glacial Revelation?",
        subtitle = "Snow cards left in library:{next_state}",
-       caption = "Assuming you play Glacial revelation turn three on the play.")
+       caption = "Assuming you play Glacial Revelation turn three on the play.")
+
+draw_gif <- ggplot(hits_distibutions_draw, aes(hits, prob)) + 
+  geom_col(color = "black") +
+  transition_states(possible_hits, transition_length = 1, state_length = 2) +
+  theme_cowplot() +
+  labs(x = "Number of snow cards", 
+       y = "Probability",
+       title = "How many hits can you expect from Glacial Revelation?",
+       subtitle = "Snow cards left in library:{next_state}",
+       caption = "Assuming you play Glacial Revelation turn three on the draw.")
+
+anim_save("on_the_play.gif", play_gif)
+anim_save("on_the_draw.gif", draw_gif)
