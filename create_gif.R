@@ -18,7 +18,7 @@ create_hits_distibution <- function(snow_card_count, deck_size = 31){
 hits_distibutions_play <- map_dfr(5:20, create_hits_distibution)
 hits_distibutions_draw <- map_dfr(5:20, create_hits_distibution, deck_size = 30)
 
-play_gif <- ggplot(hits_distibutions, aes(hits, prob)) + 
+play_gif <- ggplot(hits_distibutions_play, aes(hits, prob)) + 
   geom_col(color = "black") +
   transition_states(possible_hits, transition_length = 1, state_length = 2) +
   theme_cowplot() +
